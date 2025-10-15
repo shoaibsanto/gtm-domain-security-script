@@ -33,6 +33,7 @@ This script ensures that your GTM container only runs on approved domains, preve
 ### 2. Direct Implementation
 
 Alternatively, add directly to your website's `<head>` section **before** the GTM snippet:
+
 ```html
 <head>
   <!-- GTM Security Script -->
@@ -41,9 +42,9 @@ Alternatively, add directly to your website's `<head>` section **before** the GT
       'use strict';
       
       var allowedDomains = [
-        'healthhub.sg',
-        'www.healthhub.sg',
-        'eservices.healthhub.sg'
+        'yourdomain.com',
+        'www.yourdomain.com',
+        'app.yourdomain.com'
       ];
       
       var currentHost = window.location.hostname;
@@ -96,19 +97,20 @@ Alternatively, add directly to your website's `<head>` section **before** the GT
 ### Allowed Domains
 
 Update the `allowedDomains` array with your authorized domains:
+
 ```javascript
 var allowedDomains = [
-  'healthhub.sg',           // Main domain
-  'www.healthhub.sg',       // WWW subdomain
-  'eservices.healthhub.sg', // Specific subdomain
-  'yourdomain.com',
-  'app.yourdomain.com'
+  'yourdomain.com',         // Main domain
+  'www.yourdomain.com',     // WWW subdomain
+  'app.yourdomain.com',     // Specific subdomain
+  'staging.yourdomain.com'
 ];
 ```
 
 ### Alert Endpoint (Optional)
 
 Configure the beacon endpoint to log unauthorized attempts:
+
 ```javascript
 navigator.sendBeacon('https://yourdomain.com/api/gtm-alert', JSON.stringify({
   unauthorizedDomain: currentHost,
@@ -130,7 +132,7 @@ navigator.sendBeacon('https://yourdomain.com/api/gtm-alert', JSON.stringify({
 
 ### Authorized Domain
 ```
-✅ GTM Authorized on: healthhub.sg
+✅ GTM Authorized on: yourdomain.com
 ```
 
 ### Unauthorized Domain
@@ -179,11 +181,11 @@ var allowedDomains = [
 ```
 
 ### Include All Subdomains
-The script automatically includes all subdomains. For example, `healthhub.sg` will match:
-- `healthhub.sg`
-- `www.healthhub.sg`
-- `api.healthhub.sg`
-- Any other `*.healthhub.sg`
+The script automatically includes all subdomains. For example, `yourdomain.com` will match:
+- `yourdomain.com`
+- `www.yourdomain.com`
+- `api.yourdomain.com`
+- Any other `*.yourdomain.com`
 
 To block specific subdomains, you'll need to implement exclusion logic.
 
